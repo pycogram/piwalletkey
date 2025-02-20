@@ -37,22 +37,6 @@ const UserSchema = new mongoose.Schema({
         // },
         // trim: true,
     },
-    // subject: {
-    //     type: String,
-    //     // required: [true, "subject is required"],
-    //     // validate: {
-    //     //     validator: function(v){
-    //     //         return typeof v !== String
-    //     //     },
-    //     //     message: props => `${props.value} is not a string. Use only alphabets`
-    //     // },
-    //     // trim: true,
-    // },
-    // message: {
-    //     type: String,
-    //     // required: [true, "message is required"],
-    //     // trim: true,
-    // },
     wallet: {
         type: String,
         // required: [true, "username is required"],
