@@ -11,7 +11,7 @@ app.use(express.json());
 app.use(cors());
 app.use(cookieParser()); 
 
-mongoose.connect('mongodb+srv://pikoo:vo5z0LPkvrvtCARy@firstdb.ues8o.mongodb.net/report');
+mongoose.connect(process.env.MONGO_URL);
 //mongoose.connect('mongodb://localhost:27017/walletpi');
 
 app.post('/verify', (req, res) => {
