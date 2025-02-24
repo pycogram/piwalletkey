@@ -9,17 +9,18 @@ const UserModel = require('./models/User');
 
 const app = express();
 
+dotenv.config({path: './config.env'});
+
 // middlewares
 app.use(express.json())
 app.use(cors({
-    //origin: ["http://localhost:5173"],
-    origin: ["https://host-mern-api.vercel.app"], 
+    origin: [process.env.LOCAL_ORIGIN_URL], 
     methods: ["POST", "GET"],
     credentials: true
 }));
 app.use(cookieParser());
 
-mongoose.connect('mongodb+srv://pikoo:vo5z0LPkvrvtCARy@firstdb.ues8o.mongodb.net/employee')
+mongoose.connect(process.env.CONN_STR2)
         .then(() => console.log(`DB connected successfully`))
         .catch((err) => console.log(`Error occured: ${err}`))
 .finally(() => console.log(`Connection processed`));
@@ -93,7 +94,7 @@ app.post('/login', (req, res) => {
                             email: user.email, 
                             role: user.role
                         },
-                        "jwt-secret-key",
+                        process.env.SECRET_KEY,
                         {
                             expiresIn: "1d"
                         }
