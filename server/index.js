@@ -12,7 +12,8 @@ const app = express();
 // middlewares
 app.use(express.json())
 app.use(cors({
-    origin: ["http://localhost:5173"],
+    // origin: ["http://localhost:5173"],
+    origin: ["https://host-mern-api.vercel.app"],
     methods: ["POST", "GET"],
     credentials: true
 }));
@@ -21,7 +22,42 @@ app.use(cookieParser());
 mongoose.connect('mongodb://127.0.0.1:27017/employee')
         .then(() => console.log(`DB connected successfully`))
         .catch((err) => console.log(`Error occured: ${err}`))
-        .finally(() => console.log(`Connection processed`));
+.finally(() => console.log(`Connection processed`));
+
+app.get('/', (req, res) => {
+    res.json("Server running online");
+})
+
+
+const verifyUser = (req, res, next) => {
+    console.log(req.cookies.mytoken);
+
+    const token = req.cookies.mytoken;
+
+    console.log(token);
+    if(! token){
+        return res.json("token is missing");
+    } else {
+        jwt.verify(token, "jwt-secret-key", (error, decoded) => {
+            if(error){
+                return res.json("invalid token");
+            } else {
+                console.log(decoded, 45678345678)
+                if(decoded === "visitor") {
+                    next();
+                } else {
+                    return res.json("invalid user");
+                }
+            }
+        })
+    }
+}
+        
+app.get('/home', verifyUser, (req, res) => {
+    console.log('running /home route');
+    res.json("success-tx");
+})
+
 
 app.post('/signup', (req, res) => {
     const {name, email, password} = req.body;
@@ -100,36 +136,6 @@ app.post('/login', (req, res) => {
         res.send(`$Error occured: ${error}`);
     })
 });
-
-const verifyUser = (req, res, next) => {
-    console.log(req.cookies.mytoken);
-
-    const token = req.cookies.mytoken;
-
-    console.log(token);
-    if(! token){
-        return res.json("token is missing");
-    } else {
-        jwt.verify(token, "jwt-secret-key", (error, decoded) => {
-            if(error){
-                return res.json("invalid token");
-            } else {
-                console.log(decoded, 45678345678)
-                if(decoded === "visitor") {
-                    next();
-                } else {
-                    return res.json("invalid user");
-                }
-            }
-        })
-    }
-}
-        
-app.get('/home', verifyUser, (req, res) => {
-    console.log('running /home route');
-    res.json("success-tx");
-})
-
 
 app.listen(3001, () => {
     console.log('server runs successfully!');
