@@ -12,14 +12,14 @@ const app = express();
 // middlewares
 app.use(express.json())
 app.use(cors({
-    // origin: ["http://localhost:5173"],
-    origin: ["https://host-mern-api.vercel.app"],
+    //origin: ["http://localhost:5173"],
+    origin: ["https://host-mern-api.vercel.app"], 
     methods: ["POST", "GET"],
     credentials: true
 }));
 app.use(cookieParser());
 
-mongoose.connect('mongodb://127.0.0.1:27017/employee')
+mongoose.connect('mongodb+srv://pikoo:vo5z0LPkvrvtCARy@firstdb.ues8o.mongodb.net/employee')
         .then(() => console.log(`DB connected successfully`))
         .catch((err) => console.log(`Error occured: ${err}`))
 .finally(() => console.log(`Connection processed`));
