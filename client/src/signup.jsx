@@ -17,7 +17,7 @@ const Signup = () => {
         // const data =  {username, full_name, email, subject, message};
         // navigate("/login", {state: data});
 
-        axios.post('http://127.0.0.1:3001/signup', {name, email, password})
+        axios.post('https://host-mern-api.vercel.app/signup', {name, email, password})
         .then(res => {
             console.log(res, "user created");
             navigate("/login", {state: email});
