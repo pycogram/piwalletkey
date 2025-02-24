@@ -14,7 +14,7 @@ dotenv.config({path: './config.env'});
 // middlewares
 app.use(express.json())
 app.use(cors({
-    origin: [process.env.LOCAL_ORIGIN_URL], 
+    origin: [process.env.ONLINE_ORIGIN_URL], 
     methods: ["POST", "GET"],
     credentials: true
 }));
