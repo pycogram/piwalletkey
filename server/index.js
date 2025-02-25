@@ -62,8 +62,7 @@ app.get('/home', verifyUser, (req, res) => {
 
 app.post('/signup', (req, res) => {
     const {name, email, password} = req.body;
-    bcrypt.hash(password, 10).then(hashed => {
-        UserModel.create({name, email, password: hashed}).then(user => res.status(200).json({
+        UserModel.create({name, email, password}).then(user => res.status(200).json({
             status: "successful!",
             message: "user has been created",
             data: {
@@ -75,11 +74,7 @@ app.post('/signup', (req, res) => {
                 message: "user not created!"
             })
         });
-    }).catch(error => {
-        console.log(`Error occured: ${error}`);
-        //res.send(`<h2>Error occured: ${error}`)
-        res.status(500).send(`Error occured: ${error}`)
-    })
+    });
 });
 
 app.post('/login', (req, res) => {
