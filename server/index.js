@@ -14,7 +14,7 @@ dotenv.config({path: './config.env'});
 // middlewares
 app.use(express.json())
 app.use(cors({
-    origin: ["https://host-mern-client.vercel.app"], 
+    origin: [""], 
     methods: ["POST", "GET"],
     credentials: true
 }));
