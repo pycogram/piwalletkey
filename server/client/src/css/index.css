@@ -1,0 +1,23 @@
+@import "tailwindcss";
+
+.setImg{
+    @apply w-22 h-20;
+}
+.setSpanAA{
+    @apply cursor-pointer;
+}
+.setInput{
+    @apply border ml-2 mt-1 rounded-lg sm:w-xs w-70 py-2 px-4 border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 
+}
+.setLabel{
+    @apply text-start float-start
+}
+.setInputBox{
+    @apply block pb-1 w-fit justify-self-center items-center 
+}
+.bg4airdrop{
+    background-image: url("../img/bg-claim.jpg");
+    background-repeat: no-repeat; 
+    background-size: cover; 
+    background-position: "center";
+}
